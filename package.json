@@ -8,7 +8,10 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "prisma generate && npx prisma migrate deploy && tsc"
+    "build": "tsc -p tsconfig.json",
+    "start": "node build/src/server.js",
+    "vercel-build": "npx prisma migrate deploy",
+    "postinstall": "prisma generate"
   },
   "devDependencies": {
     "@types/node": "^20.14.4",
