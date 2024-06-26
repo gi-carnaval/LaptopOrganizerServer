@@ -1,6 +1,7 @@
 import Fastify, { FastifyReply, FastifyRequest } from 'fastify'
 import { laptopRoutes } from './routes/laptop.routes.ts'
 import { cartRoutes } from './routes/cart.routes.ts'
+import cors from '@fastify/cors'
 
 const fastify = Fastify({
     logger: true
@@ -8,6 +9,12 @@ const fastify = Fastify({
 
 fastify.get('/api', async (request: FastifyRequest, reply: FastifyReply) => {
     reply.status(200).send({Hello: "World"})
+})
+
+fastify.register(cors, {
+    origin: (origin, cb) => {
+        cb(null, true)
+    }
 })
 
 fastify.register(laptopRoutes, {prefix: '/api'})

@@ -1,6 +1,10 @@
 import { laptopController } from "../controllers/laptop.controller";
 
-export async function laptopRoutes(fastify, options) {
-    fastify.get('/cart/:cartId/laptops', laptopController.getAllLaptopsFromSpecificCart)
+async function laptopRoutes(fastify, options) {
+    fastify.get('/cart/:cartSlug/laptops', laptopController.getAllLaptopsFromSpecificCart)
+    fastify.get('/laptop/:laptopCode', laptopController.getCartNameByLaptopCode)
     fastify.post('/laptop', laptopController.saveLaptop)
+    fastify.put('/laptop', laptopController.updateLaptopCart)
 }
+
+export { laptopRoutes }

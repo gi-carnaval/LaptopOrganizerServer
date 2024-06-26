@@ -10,6 +10,7 @@ function generateSlug(cartName: string): string {
 async function saveCart(request: FastifyRequest<{ Body: SaveCart}>, reply: FastifyReply) {
     const { name } = request.body
     const slug = generateSlug(name)
+    console.log("Slug aqui: ", slug)
     try {
         const cart = await cartServices.create(name, slug)
         reply.status(200).send(cart)

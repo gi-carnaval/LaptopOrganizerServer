@@ -1,3 +1,17 @@
 export interface GetLaptopsByCartIdParams {
-    cartId: string
+    cartSlug: string
+}
+
+export interface SaveLaptopInCartBody {
+    laptopCode: number
+    cartSlug: string
+}
+
+export interface UpdateLaptopCartBody {
+    laptopCode: number
+    newCartSlug: string
+}
+
+export interface GetCartNameByLaptopCodeParam {
+    laptopCode: string
 }
