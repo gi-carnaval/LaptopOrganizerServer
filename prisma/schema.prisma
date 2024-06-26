@@ -6,20 +6,21 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 model Cart {
-  id String @id @default(uuid())
-  name String
-  slug String
+  id      String   @id @default(uuid())
+  name    String
+  slug    String
   laptops Laptop[]
 }
 
 model Laptop {
-  id String @id @default(uuid())
-  laptopCode Int @unique
-  cartId String
-  cart Cart @relation(fields: [cartId], references: [id])
+  id         String @id @default(uuid())
+  laptopCode Int    @unique
+  cartId     String
+  cart       Cart   @relation(fields: [cartId], references: [id])
 }
