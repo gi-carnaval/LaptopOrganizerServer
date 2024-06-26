@@ -1,6 +1,6 @@
 import Fastify, { FastifyReply, FastifyRequest } from 'fastify'
-import { laptopRoutes } from './routes/laptop.routes.ts'
-import { cartRoutes } from './routes/cart.routes.ts'
+import { laptopRoutes } from './routes/laptop.routes'
+import { cartRoutes } from './routes/cart.routes'
 import cors from '@fastify/cors'
 
 const fastify = Fastify({

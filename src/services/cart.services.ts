@@ -1,6 +1,6 @@
 import { cartRepository } from "../models/prismaClient"
 
-async function create(cartName, slug) {
+async function create(cartName: string, slug: string) {
     const existCart = await cartRepository.findFirst({
         where: {
             slug: slug

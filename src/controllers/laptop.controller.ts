@@ -2,7 +2,7 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { laptopServices } from "../services/laptop.services.js";
 import { GetCartNameByLaptopCodeParam, GetLaptopsByCartIdParams, SaveLaptopInCartBody, UpdateLaptopCartBody } from "../resource/laptop.resource";
 import { createErrorResponse } from "../common/error.resource.js";
-import { HttpStatus } from "../common/HttpStatus.js";
+import { HttpStatus } from "../common/httpStatus.js";
 
 async function getAllLaptopsFromSpecificCart(request: FastifyRequest<{ Params: GetLaptopsByCartIdParams }>, reply: FastifyReply) {
     const { cartSlug } = request.params
