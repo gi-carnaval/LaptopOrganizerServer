@@ -5,7 +5,7 @@ import { cartServices } from "./cart.services"
 async function getLaptopsFromCart(cartSlug: string) {
     const cart = await cartServices.getCartBySlug(cartSlug)
     if (!cart) {
-        return "Carrinho não encontrado"
+        return createResult(null, `Carrinho não encontrado`);
     }
 
     const laptops = await laptopRepository.findMany({
@@ -22,7 +22,7 @@ async function getLaptopsFromCart(cartSlug: string) {
             }
         }
     })
-    return laptops
+    return createResult(laptops, null);
 }
 
 async function laptopExists(laptopCode: number) {
