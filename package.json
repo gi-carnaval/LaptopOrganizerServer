@@ -2,12 +2,11 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "Servidor do aplicativo Organizador de Notebooks do SENAI Ourinhos-SP",
-  "main": "index.js",
+  "main": "server.js",
   "author": "",
   "license": "ISC",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc -p tsconfig.json",
     "start": "node build/src/server.js",
     "vercel-build": "npx prisma migrate deploy",
