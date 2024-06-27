@@ -7,29 +7,29 @@ import { HttpStatus } from "../common/httpStatus.js";
 async function getAllLaptopsFromSpecificCart(request: FastifyRequest<{ Params: GetLaptopsByCartIdParams }>, reply: FastifyReply) {
     const { cartSlug } = request.params
 
-    try {
-        const laptops = await laptopServices.getLaptopsFromCart(cartSlug)
-        reply.status(200).send(laptops)
-    } catch (err) {
-        reply.status(500).send({ error: 'Erro ao buscar notebooks do carrinho' })
+    const laptops = await laptopServices.getLaptopsFromCart(cartSlug)
+
+    if (laptops.isError()) {
+        console.error(`Erro ao buscar notebooks no carrinho. Erro: ${laptops.error}`)
+        return reply.status(HttpStatus.NOT_FOUND).send(createErrorResponse(`${laptops.error}`))
     }
+    reply.status(200).send(laptops)
 }
 async function getCartNameByLaptopCode(request: FastifyRequest<{ Params: GetCartNameByLaptopCodeParam }>, reply: FastifyReply) {
     const { laptopCode } = request.params
 
     const laptop = await laptopServices.laptopExists(parseInt(laptopCode))
 
-    if(!laptop) {
+    if (!laptop) {
         return reply
-        .status(HttpStatus.NOT_FOUND)
-        .send(createErrorResponse("Notebook não encontrado"))
+            .status(HttpStatus.NOT_FOUND)
+            .send(createErrorResponse("Notebook não encontrado"))
     }
     reply.status(HttpStatus.OK).send(laptop)
 }
 
 async function saveLaptop(request: FastifyRequest<{ Body: SaveLaptopInCartBody }>, reply: FastifyReply) {
     const { laptopCode, cartSlug } = request.body;
-    console.log("LaptopCode here: ", laptopCode)
     const laptop = await laptopServices.saveLaptop(laptopCode, cartSlug)
 
     if (laptop.isError()) {
@@ -40,7 +40,7 @@ async function saveLaptop(request: FastifyRequest<{ Body: SaveLaptopInCartBody }
     reply.status(HttpStatus.OK).send(laptop)
 }
 
-async function updateLaptopCart(request: FastifyRequest<{ Body: UpdateLaptopCartBody }>, reply: FastifyReply){
+async function updateLaptopCart(request: FastifyRequest<{ Body: UpdateLaptopCartBody }>, reply: FastifyReply) {
     const { laptopCode, newCartSlug } = request.body
 
     const laptop = await laptopServices.updateLaptopCart(laptopCode, newCartSlug)
