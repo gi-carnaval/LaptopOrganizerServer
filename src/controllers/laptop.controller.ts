@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { laptopServices } from "../services/laptop.services.js";
-import { GetCartNameByLaptopCodeParam, GetLaptopsByCartIdParams, SaveLaptopInCartBody, UpdateLaptopCartBody } from "../resource/laptop.resource";
+import { DeleteLaptop, GetCartNameByLaptopCodeParam, GetLaptopsByCartIdParams, SaveLaptopInCartBody, UpdateLaptopCartBody } from "../resource/laptop.resource";
 import { createErrorResponse } from "../common/error.resource.js";
 import { HttpStatus } from "../common/httpStatus.js";
 
@@ -48,9 +48,21 @@ async function updateLaptopCart(request: FastifyRequest<{ Body: UpdateLaptopCart
 
 }
 
+async function deleteLaptopCart(request: FastifyRequest<{ Body: DeleteLaptop }>, reply: FastifyReply) {
+    const { laptopCode } = request.body
+
+    const laptop = await laptopServices.deleteLaptop(laptopCode)
+
+    if (laptop.isError()) {
+        return reply.status(HttpStatus.NOT_FOUND).send(createErrorResponse(`${laptop.error}`))
+    }
+    return reply.status(HttpStatus.OK).send(laptop)
+}
+
 export const laptopController = {
     getAllLaptopsFromSpecificCart,
     getCartNameByLaptopCode,
     saveLaptop,
-    updateLaptopCart
+    updateLaptopCart,
+    deleteLaptopCart
 }

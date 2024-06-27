@@ -80,9 +80,20 @@ async function updateLaptopCart(laptopCode: number, newCartSlug: string) {
     return createResult(laptop, null)
 }
 
+async function deleteLaptop(laptopCode: number) {
+    await laptopRepository.delete({
+        where: {
+            laptopCode: laptopCode
+        }
+    })
+
+    return createResult(null, null)
+}
+
 export const laptopServices = {
     getLaptopsFromCart,
     laptopExists,
     saveLaptop,
-    updateLaptopCart
+    updateLaptopCart,
+    deleteLaptop
 }

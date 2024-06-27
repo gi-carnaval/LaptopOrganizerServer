@@ -12,6 +12,10 @@ export interface UpdateLaptopCartBody {
     newCartSlug: string
 }
 
+export interface DeleteLaptop {
+    laptopCode: number
+}
+
 export interface GetCartNameByLaptopCodeParam {
     laptopCode: string
 }

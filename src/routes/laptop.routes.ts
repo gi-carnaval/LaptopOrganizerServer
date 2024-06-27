@@ -6,6 +6,7 @@ async function laptopRoutes(fastify: FastifyInstance) {
     fastify.get('/laptop/:laptopCode', laptopController.getCartNameByLaptopCode)
     fastify.post('/laptop', laptopController.saveLaptop)
     fastify.put('/laptop', laptopController.updateLaptopCart)
+    fastify.delete('/laptop', laptopController.deleteLaptopCart)
 }
 
 export { laptopRoutes }
