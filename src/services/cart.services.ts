@@ -1,3 +1,4 @@
+import { createResult } from "../common/result";
 import { cartRepository } from "../models/prismaClient"
 
 async function create(cartName: string, slug: string) {
@@ -8,7 +9,7 @@ async function create(cartName: string, slug: string) {
     })
 
     if(existCart) {
-        return `${existCart.name} já criado`
+        return createResult(null, `${existCart.name} já criado`);
     }
 
     const cart = await cartRepository.create({
@@ -18,7 +19,7 @@ async function create(cartName: string, slug: string) {
         }
     })
 
-    return cart
+    return createResult(cart, null);
 }
 
 async function getCarts() {
