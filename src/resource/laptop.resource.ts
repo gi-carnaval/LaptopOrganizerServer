@@ -5,6 +5,7 @@ export interface GetLaptopsByCartIdParams {
 export interface SaveLaptopInCartBody {
     laptopCode: number
     cartSlug: string
+    password: string
 }
 
 export interface UpdateLaptopCartBody {
@@ -13,6 +14,7 @@ export interface UpdateLaptopCartBody {
 }
 
 export interface DeleteLaptop {
+    password: string
     laptopCode: number
 }
 

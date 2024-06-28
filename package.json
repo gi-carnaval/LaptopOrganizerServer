@@ -13,15 +13,19 @@
     "postinstall": "prisma generate"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/node": "^20.14.4",
     "prisma": "^5.16.0",
     "tsx": "^4.15.6",
     "typescript": "^5.4.5"
   },
   "dependencies": {
+    "@fastify/cookie": "^9.3.1",
     "@fastify/cors": "^8.0.0",
     "@prisma/client": "^5.15.0",
+    "bcrypt": "^5.1.1",
     "fastify": "^4.28.0",
-    "fastify-cors": "^6.1.0"
+    "fastify-cors": "^6.1.0",
+    "fastify-jwt": "^4.2.0"
   }
 }
