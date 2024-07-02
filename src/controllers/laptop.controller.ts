@@ -3,7 +3,6 @@ import { laptopServices } from "../services/laptop.services.js";
 import { DeleteLaptop, GetCartNameByLaptopCodeParam, GetLaptopsByCartIdParams, SaveLaptopInCartBody, UpdateLaptopCartBody } from "../resource/laptop.resource";
 import { createErrorResponse } from "../common/error.resource.js";
 import { HttpStatus } from "../common/httpStatus.js";
-import { verifyAdminPassword } from "../common/verifyAdminPassword.js";
 import { authController } from "./auth.controller.js";
 
 async function getAllLaptopsFromSpecificCart(request: FastifyRequest<{ Params: GetLaptopsByCartIdParams }>, reply: FastifyReply) {

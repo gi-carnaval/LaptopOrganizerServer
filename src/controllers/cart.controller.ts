@@ -3,6 +3,7 @@ import { SaveCart } from "../resource/cart.resource"
 import { cartServices } from "../services/cart.services"
 import { HttpStatus } from "../common/httpStatus"
 import { createErrorResponse } from "../common/error.resource"
+import { authController } from "./auth.controller"
 
 function generateSlug(cartName: string): string {
     const slug = cartName.replace(/[^\w\s]/gi, '')
@@ -10,8 +11,14 @@ function generateSlug(cartName: string): string {
 }
 
 async function saveCart(request: FastifyRequest<{ Body: SaveCart }>, reply: FastifyReply) {
-    const { name } = request.body
+    const { name, password } = request.body
     const slug = generateSlug(name)
+
+    const hasAccess = authController.checkUser(password)
+    
+    if (!hasAccess) {
+        return reply.status(HttpStatus.UNAUTHORIZED).send(createErrorResponse(`Senha Incorreta`))
+    }
 
     const cart = await cartServices.create(name, slug)
 
